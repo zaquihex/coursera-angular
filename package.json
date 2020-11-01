@@ -1,0 +1,24 @@
+{
+  "name": "coursera-angular",
+  "version": "1.0.0",
+  "description": "directory to improve my Angular skills",
+  "main": "index.html",
+  "scripts": {
+    "start": "npm run lite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lite": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaquihex/coursera-angular.git"
+  },
+  "author": "Zaquiel Rodriguez Arce",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zaquihex/coursera-angular/issues"
+  },
+  "homepage": "https://github.com/zaquihex/coursera-angular#readme",
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}
