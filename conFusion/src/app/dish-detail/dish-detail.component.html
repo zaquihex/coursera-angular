@@ -3,7 +3,7 @@
 
   <div fxFlex="50">
     <mat-card>
-      <mat-card-title>{{dish.name | uppercase}}</mat-card-title>
+      <h3 *ngIf="dish">{{dish.name | uppercase}}</h3>
       <img mat-card-image src={{dish.image}}>
       <mat-card-content>{{dish.description}}</mat-card-content>
       <mat-card-actions>
