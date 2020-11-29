@@ -6,6 +6,7 @@ import { Promotion } from '../shared/promotion';
 import { PromotionService } from '../services/promotion.service';
 import {Lead} from "../shared/lead";
 import {LeaderService} from "../services/leader.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import {LeaderService} from "../services/leader.service";
 })
 export class HomeComponent implements OnInit {
 
-  dish: Promise<Dish>;
+  dish: Dish;
   promotion: Promotion;
   leaderExecutive: Lead;
 
@@ -22,7 +23,9 @@ export class HomeComponent implements OnInit {
               private promotionservice: PromotionService, private leaderService: LeaderService ) { }
 
   ngOnInit() {
-    this.dish = this.dishservice.getFeaturedDish();
+    this.dishservice.getFeaturedDish().subscribe(dishFeature => {
+      this.dish = dishFeature
+    });
     this.promotion = this.promotionservice.getFeaturedPromotion();
     this.leaderExecutive = this.leaderService.getLeaderExecutive();
   }
