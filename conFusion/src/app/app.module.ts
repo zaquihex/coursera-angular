@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
+import { baseURL } from './shared/baseurl';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -30,6 +33,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatSliderModule} from "@angular/material/slider";
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -41,10 +45,12 @@ import {MatSliderModule} from "@angular/material/slider";
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -64,7 +70,7 @@ import {MatSliderModule} from "@angular/material/slider";
     ReactiveFormsModule,
     MatSliderModule
   ],
-  providers: [DishService],
+  providers: [DishService, {provide: 'BaseURL', useValue: baseURL}],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent
