@@ -4,7 +4,7 @@
   <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
     <mat-card>
       <h3 *ngIf="dish">{{dish.name | uppercase}}</h3>
-      <img mat-card-image src={{dish.image}}>
+      <img mat-card-image src="{{baseURL + dish.image}}">
       <mat-card-content>{{dish.description}}</mat-card-content>
       <mat-card-actions>
         <button mat-button [routerLink]="['/dishdetail', prev]"><span class="fa fa-chevron-left fa-lg"></span></button>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
+import {FeedbackService} from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -39,15 +40,19 @@ export class ContactComponent implements OnInit {
     },
   };
 
+  loading: boolean;
   feedbackForm: FormGroup;
+  formSubmitted: boolean;
   feedback: Feedback;
   contactType = ContactType;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private feedbackServide: FeedbackService) {
     this.createForm();
   }
 
   ngOnInit() {
+    this.loading = false;
+    this.formSubmitted = false;
   }
 
   createForm(): void {
@@ -111,7 +116,17 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.feedback = this.feedbackForm.value;
-    this.feedbackForm.reset();
+    this.loading = true;
+    this.feedbackServide.postFeedback(this.feedback).subscribe(data => {
+      this.loading = false;
+      this.formSubmitted = true;
+      setTimeout(()=>{
+        this.feedbackForm.reset();
+        this.formSubmitted = false;
+      },5000);
+    });
+
+
   }
 
 }

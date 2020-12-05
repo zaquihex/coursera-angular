@@ -56,6 +56,9 @@
 
   <div fxFlex>
     <h2>Corporate Leadership</h2>
+    <mat-card *ngIf="this.leaderInformation.length === 0" fxFlex>
+      <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+    </mat-card>
     <mat-list cols="2" rowHeight="200px">
       <mat-list-item *ngFor="let leadInfo of this.leaderInformation">
         <img height="200" matListAvatar src={{leadInfo.image}} />
