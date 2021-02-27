@@ -34,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatSliderModule} from "@angular/material/slider";
 import { HighlightDirective } from './directives/highlight.directive';
+import { CanActivateViaAuthGuard } from './app-routing/CanActivateViaAuthGuard';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     ReactiveFormsModule,
     MatSliderModule
   ],
-  providers: [DishService, {provide: 'BaseURL', useValue: baseURL}],
+  providers: [DishService, {provide: 'BaseURL', useValue: baseURL}, CanActivateViaAuthGuard],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent

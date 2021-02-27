@@ -56,6 +56,22 @@ export class ContactComponent implements OnInit {
   }
 
   createForm(): void {
+
+    // old version
+    /*this.feedbackForm.valueChanges
+      .subscribe(data => this.onValueChanged(data));*/
+
+    // Improvement
+
+    // object: {
+    //     'firstname': '',
+    //     'lastname': '',
+    //     'telnum': '',
+    //     'email': ''
+    //   }
+
+    // Object.keys(object) -> ['firstname','lastname','telnum','email']
+
     this.feedbackForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
@@ -66,13 +82,9 @@ export class ContactComponent implements OnInit {
       message: ''
     });
 
-    // old version
-    /*this.feedbackForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));*/
 
-    // Improvement
     const fieldsWithValidation = Object.keys(this.formErrors);
-    fieldsWithValidation.forEach( field => {
+    ['firstname','lastname','telnum','email'].forEach( field => {
       this.feedbackForm.get(field).valueChanges.subscribe(valueField => {
         this.onFieldValueChanged(field, valueField);
       })
@@ -89,6 +101,7 @@ export class ContactComponent implements OnInit {
       let messages = '';
       for(const error in fieldElem.errors) {
         messages += this.validationMessages[field][error] + '  ';
+        // messages += this.validationMessages.firstName.minLength + '  ';
       }
       this.formErrors[field] = messages;
     }
@@ -117,7 +130,7 @@ export class ContactComponent implements OnInit {
   onSubmit() {
     this.feedback = this.feedbackForm.value;
     this.loading = true;
-    this.feedbackServide.postFeedback(this.feedback).subscribe(data => {
+    this.feedbackServide.postFeedback(this.feedback).subscribe(() => {
       this.loading = false;
       this.formSubmitted = true;
       setTimeout(()=>{
