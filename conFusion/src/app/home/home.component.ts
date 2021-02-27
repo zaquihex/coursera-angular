@@ -10,6 +10,16 @@ import {Lead} from "../shared/lead";
 import {LeaderService} from "../services/leader.service";
 import {Observable} from "rxjs";
 
+
+
+interface User {
+  name: string,
+  description?: string
+  marks?: {
+    param1: 'param1'
+  }
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -27,6 +37,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    const user:User = {name: "zaquiel"};
+
     this.baseUrl = baseURL;
     this.dishservice.getFeaturedDish().subscribe(dishFeature => {
       this.dish = dishFeature
